@@ -12,4 +12,4 @@ public class TiaAsyncMiddlewareApplication {
 		SpringApplication.run(TiaAsyncMiddlewareApplication.class, args);
 	}
 
-}
+} 
