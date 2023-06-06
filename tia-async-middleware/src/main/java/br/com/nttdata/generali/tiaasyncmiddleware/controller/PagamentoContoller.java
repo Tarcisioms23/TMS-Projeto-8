@@ -30,6 +30,7 @@ import br.com.nttdata.generali.tiaasyncmiddleware.service.PagamentoService;
 public class PagamentoContoller {
 
 	
+	
 	@Autowired
 	private PagamentoService service;
 

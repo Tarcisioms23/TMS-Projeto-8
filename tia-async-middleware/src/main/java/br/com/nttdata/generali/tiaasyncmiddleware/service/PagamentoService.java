@@ -24,13 +24,17 @@ public class PagamentoService {
 	@Autowired(required=true)
 	private PagamentosRepository pagamentosRepository;
 	
-	@Autowired
-	private ModelMapper modelMapper;
+	
+	   public ModelMapper modelMapper() {
+	      ModelMapper modelMapper = new ModelMapper();
+	      return modelMapper; 
+
+	} 
 	
 	public Page<PagamentoDto> obterTodos(Pageable paginacao){
 		return pagamentosRepository
 				.findAll(paginacao)
-				.map(p-> modelMapper.map(p, PagamentoDto.class));
+				.map(p-> modelMapper().map(p, PagamentoDto.class));
 	}
 	
 	public List<Pagamentos> obterTodos2(){
@@ -43,24 +47,24 @@ public class PagamentoService {
 		Pagamentos pagamento = pagamentosRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException());
 		
-		return modelMapper.map(pagamento, PagamentoDto.class);
+		return modelMapper().map(pagamento, PagamentoDto.class);
 	}
 	
 	public PagamentoDto criaPagamento(PagamentoDto dto) {
-		Pagamentos pagamento = modelMapper.map(dto, Pagamentos.class);
+		Pagamentos pagamento = modelMapper().map(dto, Pagamentos.class);
 		pagamento.setStatus(Status.CRIADO);
 		pagamentosRepository.save(pagamento);
 		
-		return modelMapper.map(pagamento, PagamentoDto.class);
+		return modelMapper().map(pagamento, PagamentoDto.class);
 	}
 	
 	public PagamentoDto atualizarPagamento(Long id, PagamentoDto dto) {
-		Pagamentos pagamento = modelMapper.map(dto, Pagamentos.class);
+		Pagamentos pagamento = modelMapper().map(dto, Pagamentos.class);
 		pagamento.setId(id);
 		pagamento.setStatus(Status.CRIADO);
 		pagamentosRepository.save(pagamento);
 		
-		return modelMapper.map(pagamento, PagamentoDto.class);
+		return modelMapper().map(pagamento, PagamentoDto.class);
 	}
 	
 	public void excluirPagamento(Long id) {
